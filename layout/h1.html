@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="main">
+    <div class="header">
+        header
+    </div>
+    <div class="content">
+        <div class="menus">
+            menus
+        </div>
+        <div class="main-content">
+            main-content
+        </div>
+    </div>
+    <div class="footer">
+        footer
+    </div>
+</div>
+</body>
+</html>
+<style>
+    body {
+        background-color: aqua;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    .main {
+        width: 100vw;
+        height: 100vh;
+        background-color: antiquewhite;
+    }
+
+    .header {
+        width: 100vw;
+        height: 10vh;
+        background-color: aqua;
+        text-align: center;
+        line-height: 10vh;
+    }
+
+    .content {
+        width: 100vw;
+        height: 80vh;
+        background-color: aquamarine;
+        text-align: center;
+        line-height: 80vh;
+    }
+
+    .footer {
+        width: 100vw;
+        height: 10vh;
+        background-color: blueviolet;
+        text-align: center;
+        line-height: 10vh;
+    }
+
+    .menus {
+        width: 15vw;
+        height: inherit;
+        display: block;
+        float: left;
+        background-color: antiquewhite;
+    }
+
+    .main-content {
+        width: 85vw;
+        height: inherit;
+        float: right;
+        background-color: brown;
+    }
+
+    @media only screen and (max-width: 500px) {
+        .menus {
+            width: 100vw;
+            height: 10vh;
+        }
+
+        .main-content {
+            width: 100vw;
+        }
+
+        body {
+            overflow-y: auto;
+        }
+    }
+</style>

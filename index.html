@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>级联菜单</title>
+    <link rel="stylesheet" href="css/common.css"/>
+
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/data.js"></script>
+</head>
+<body>
+<div class="content">
+    <div class="content-main">
+        <div class="label-div">
+            <label>请选择省市:</label>
+        </div>
+        <div class="input-div">
+            <input class="input-class">
+        </div>
+        <div class="area-content">
+            <ul class="area-items">
+                <li>111</li>
+            </ul>
+            <ul class="area-children-items">
+                <li>111</li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    var data = new com.server();
+    console.log(data.data)
+    $(function () {
+        $(".input-class").focus(function () {
+            $(".area-items").show(500);
+            var html = "";
+            for (var i = 0; i < data.data.length; i++) {
+                html += "<li data-index='" + i + "'>" + data.data[i].name + "</li>";
+            }
+            $(".area-items").html(html);
+        })
+    })
+
+    $(".area-items").on('click', 'li', function () {
+        $(".area-items").hide();
+        var index = this.dataset.index;
+        console.log(data.data[index]);
+        var item = data.data[index];
+        var html = "";
+        for (var i = 0; i < item.children.length; i++) {
+            html += "<li data-index='" + i + "' data-parent_index='" + index + "'>" + item.children[i].name + "</li>";
+        }
+        $(".area-children-items").show();
+        $(".area-children-items").html(html);
+    })
+
+    $(".area-children-items").on('click', 'li', function () {
+        $(".area-items").hide();
+        $(".area-children-items").hide();
+        var parent_index = this.dataset.parent_index;
+        var index = this.dataset.index;
+
+        $(".input-class").val(" " + data.data[parent_index].name +"/" +data.data[parent_index].children[index].name);
+    })
+</script>
+
+</html>
