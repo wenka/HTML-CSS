@@ -1,4 +1,4 @@
-var appKey = "vnroth0kv4zoo";
+var appKey = "***********";
 
 var token = "nTRNWz9MUnTauK5m/l0sUwWSpXz4WtgZByJ1EL68IG9wislOA3wXNq+2JjHD6mvQwu/1rbhkBf5GeglxjKMbQw==";
 var config = {
