@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>即时通讯</title>
+
+    <link rel="stylesheet" href="css/style.css" media="screen" type="text/css"/>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue"></script>
+    <script src="js/RongIMLib-2.2.9.min.js"></script>
 
-    <link rel="stylesheet" href="css/style.css" media="screen" type="text/css"/>
+    <script src="js/chat.js"></script>
 </head>
 <body>
 <div id="convo" data-from="Sonu Joshi">
@@ -98,11 +102,35 @@
                     }
                 ],
                 message: null,
-                nowUserIndex: -1
+                nowUserIndex: 0,
+                newMessage: {}
+            },
+            created: function () {
+                var that = this;
+                RongIMClient.setOnReceiveMessageListener({
+                    // 接收到的消息
+                    onReceived: function (content) {
+                        // 判断消息类型
+                        console.log("新消息：");
+                        that.newMessage = content;
+                        console.log(content.content)
+                        console.log(content.senderUserId)
+                    }
+                });
+            },
+            mounted: function () {
+                if (this.message == null) {
+                    this.messageList = this.userList[0].messageList;
+                }
+                console.log(RongIMLib)
             },
             watch: {
-                messageList: function (old) {
+                messageList: function () {
                     this.userList[this.nowUserIndex].messageList = this.messageList;
+                },
+                newMessage: function () {
+                    var content = this.newMessage.content.content;
+                    var senderUserId = this.newMessage.senderUserId;
                 }
             },
             methods: {
@@ -119,6 +147,7 @@
                         form: 'me'
                     })
                     $(".chat-thread").scrollTop($('.chat-thread')[0].scrollHeight);
+                    window.sendTextMessage("-1", this.message)
                 }
             }
         })
