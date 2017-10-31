@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>即时通讯</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue"></script>
 
     <link rel="stylesheet" href="css/style.css" media="screen" type="text/css"/>
@@ -16,13 +21,14 @@
             <div>{{ user.name }}</div>
         </li>
     </div>
-    <ul class="chat-thread">
-        <li v-for="message in messageList" :class="message.form">{{ message.content}}</li>
-    </ul>
-
-    <div>
-        <input type="text" name="text" id="text" v-model="message">
-        <button @click="send">发送</button>
+    <div class="content">
+        <ul class="chat-thread">
+            <li v-for="message in messageList" :class="message.form">{{ message.content }}</li>
+        </ul>
+        <div class="input-div">
+            <textarea class="form-control" rows="3" v-model="message"  style="resize:none" ></textarea>
+            <button class="btn btn-default" @click="send">发送</button>
+        </div>
     </div>
 </div>
 </body>
@@ -118,8 +124,14 @@
 </script>
 <style>
     #convo {
+        text-align: center;
         margin-top: 5vh;
         background-color: #192c46;
+    }
+
+    .content {
+        margin: 0 auto;
+        display: inline-block;
     }
 
     .chat-thread {
@@ -161,6 +173,11 @@
         vertical-align: middle;
         height: inherit;
         border-radius: 50%;
+    }
+
+    .input-div {
+        width: 60vw;
+        text-align: right;
     }
 </style>
 </html>
