@@ -26,7 +26,7 @@
             <li v-for="message in messageList" :class="message.form">{{ message.content }}</li>
         </ul>
         <div class="input-div">
-            <textarea class="form-control" rows="3" v-model="message"  style="resize:none" ></textarea>
+            <textarea class="form-control" rows="3" v-model="message" style="resize:none"></textarea>
             <button class="btn btn-default" @click="send">发送</button>
         </div>
     </div>
@@ -107,8 +107,10 @@
             },
             methods: {
                 view: function (index) {
+                    $(".user-list li").removeClass("active")
                     this.messageList = this.userList[index].messageList
                     this.nowUserIndex = index;
+                    $(".user-list li").eq(index).addClass("active")
                 },
                 send: function () {
                     var that = this;
@@ -162,6 +164,11 @@
         line-height: 50px;
         margin: 5px;
         cursor: pointer;
+        border-radius: 10px;
+    }
+
+    .user-list li:hover {
+        background-color: #0EC879;
     }
 
     .user-list li div {
@@ -178,6 +185,10 @@
     .input-div {
         width: 60vw;
         text-align: right;
+    }
+
+    .active {
+        background-color: #0EC879;
     }
 </style>
 </html>
